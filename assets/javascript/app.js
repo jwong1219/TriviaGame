@@ -29,11 +29,13 @@ var gameLibrary = {
   },
 
   timeUp: function() {
+    console.log("inside timeUp");
     //if time runs out...
     //count the question as unanswered
     gameLibrary.unanswered++;
     //stop the timer, set counting to false;
     gameLibrary.counting = false;
+    console.log(gameLibrary.counting);
     gameLibrary.stopTimer();
     gameLibrary.resetTimer();
     //display the time up msg and the correct answer
@@ -98,18 +100,21 @@ console.log(gameLibrary.questionSet);
 $("#start").on("click", function() {
   //hide the start button
   $("#start").addClass("hidden");
+  //change the html from the start page to the question set format
+  $("#welcome").addClass("hidden");
+  $("#onStart").removeClass("hidden");
   //start the timer & countdown for this question, change counting to true;
   gameLibrary.startTimer();
   gameLibrary.counting = true;
   console.log(gameLibrary.counting);
-  timerID = setTimeout(gameLibrary.timeUp, 1000 * 3);
+  timerID = setTimeout(gameLibrary.timeUp, 1000 * 30);
   //display the question and options for this question
   displayQSet(gameLibrary.questionSet[gameLibrary.qTracker]);
 });
 
 
 //if the player clicks on an option
-$(".answer").on("click", function() {
+$("#option1").on("click", function() {
   var picked = $(this);
   console.log({picked});
   //if counting down...
@@ -166,7 +171,7 @@ $("#next").on("click", function() {
     gameLibrary.startTimer();
     gameLibrary.counting = true;
     console.log(gameLibrary.counting);
-    timerID = setTimeout(gameLibrary.timeUp, 1000 * 3);
+    timerID = setTimeout(gameLibrary.timeUp, 1000 * 30);
   }
   //else
   else {
