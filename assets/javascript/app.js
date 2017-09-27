@@ -21,11 +21,25 @@ var gameLibrary = {
   },
 
   startTimer: function() {
-    timerID = setInterval(gameLibrary.countDown, 1000);
+    countdownID = setInterval(gameLibrary.countDown, 1000);
   },
 
   stopTimer: function() {
-    clearInterval(timerID);
+    clearInterval(countdownID);
+  },
+
+  timeUp: function() {
+    //if time runs out...
+    //count the question as unanswered
+    gameLibrary.unanswered++;
+    //stop the timer, set counting to false;
+    gameLibrary.counting = false;
+    gameLibrary.stopTimer();
+    gameLibrary.resetTimer();
+    //display the time up msg and the correct answer
+    $("#message").text("Time's Up!");
+    //make the next button visible
+    $("#next").removeClass("hidden");
   },
 
   correctMessage: function() {
@@ -37,6 +51,7 @@ var gameLibrary = {
   }
 }
 
+var countdownID;
 var timerID;
 
 function QSet(question, option1, option2, option3, option4, correct) {
@@ -83,22 +98,15 @@ console.log(gameLibrary.questionSet);
 $("#start").on("click", function() {
   //hide the start button
   $("#start").addClass("hidden");
-  //start the timer for this question, change counting to true;
+  //start the timer & countdown for this question, change counting to true;
   gameLibrary.startTimer();
   gameLibrary.counting = true;
   console.log(gameLibrary.counting);
+  timerID = setTimeout(gameLibrary.timeUp, 1000 * 3);
   //display the question and options for this question
   displayQSet(gameLibrary.questionSet[gameLibrary.qTracker]);
 });
-//if time runs out...
 
-  //count the question as unanswered
-
-  //stop the timer, set counting to false;
-
-  //display the time up msg and the correct answer
-
-  //make the next button visible
 
 //if the player clicks on an option
 $(".answer").on("click", function() {
@@ -112,6 +120,7 @@ $(".answer").on("click", function() {
     console.log(gameLibrary.counting);
     gameLibrary.stopTimer();
     gameLibrary.resetTimer();
+    clearTimeout(timerID);
     //evaluate
     //if correct, 
     if (picked.attr('id') === gameLibrary.questionSet[gameLibrary.qTracker].correct) {
@@ -144,7 +153,7 @@ $(".answer").on("click", function() {
 //if the "next" button is clicked
 $("#next").on("click", function() {
   //hide the "next" button
-  $(this).addClass("invisible");
+  $(this).addClass("hidden");
   //if there are more questions left
   if((gameLibrary.qTracker + 1) < gameLibrary.questionSet.length) {
     //reset the css formatting on the answers html
@@ -157,10 +166,17 @@ $("#next").on("click", function() {
     gameLibrary.startTimer();
     gameLibrary.counting = true;
     console.log(gameLibrary.counting);
+    timerID = setTimeout(gameLibrary.timeUp, 1000 * 3);
   }
   //else
-
+  else {
     //display the end game "page" with the score results
+    $("#message").text("Game Over!");
+    $("#content").html("<div id='results'></div>");
+    $("#results").append("<h2>Correct: " + gameLibrary.correct);
+    $("#results").append("<h2>Incorrect: " + gameLibrary.incorrect);
+    $("#results").append("<h2>Unanswered: " + gameLibrary.unanswered);
+  }
 
 });
 
