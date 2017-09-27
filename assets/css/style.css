@@ -1,0 +1,7 @@
+* {
+  border: 1px solid darkgrey;
+}
+
+#pageContainer {
+  max-width: 90%;
+}
