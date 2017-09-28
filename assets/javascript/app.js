@@ -73,9 +73,9 @@ $(document).ready(function() {
     $("#content").append('<div class="prompt"><h2>Question: <span id="question">' + index.question + '</span></h2></div>');
     index.options.forEach(populateOptions);
 
-      function populateOptions(option,index) {
-        $("#content").append('<div class="answer-line"><h3><span class="answer" id="option'+ (index+1) +'">'+ option +'</span></h3></div>');
-      }
+    function populateOptions(option,index) {
+      $("#content").append('<div class="answer-line"><h3><span class="answer" id="option'+ (index+1) +'">'+ option +'</span></h3></div>');
+    }
   }
 
   // test scripting starts here;
@@ -86,7 +86,10 @@ $(document).ready(function() {
   var q3 = new QSet("What does Ben 'Treat Yoself' to?", "A Lightsaber", "A model of the starship Galactaca", "A new car", "A Batsuit", "option4");
   gameLibrary.questionSet.push(q3);
   gameLibrary.questionSet.push(new QSet("What is the name of the game that Ben creates?", "Settlers of Catan", "Dominion", "The Cones of Dunshire", "The Mines of Moria", "option3"));
-  gameLibrary.questionSet.push(new QSet("Who is Pawnee's biggest celebrity?", "Li'l Sebastian", ))
+  gameLibrary.questionSet.push(new QSet("Who is Pawnee's biggest celebrity?", "Li'l Sebastian", "Roy Hibbert", "Pete Disellio", "Perd Hapley", "option1"));
+  gameLibrary.questionSet.push(new QSet("What is the name of Pawnee's most raunchy morning talk show?", "Eric Cartman and the Coon", "Howard Stern", "Batty Bob and the Tweaky Trio", "Crazy Ira and the Douche", "option4"));
+  gameLibrary.questionSet.push(new QSet("What is the name of Joan Calamezzo's television talk show?", "Pawnee Now", "Pawnee Today", "Pawnee in the Morning", "Good Morning Pawnee", "option2"));
+
 
   console.log(gameLibrary.questionSet);
 
@@ -126,7 +129,7 @@ $(document).ready(function() {
     gameLibrary.startTimer();
     gameLibrary.counting = true;
     console.log(gameLibrary.counting);
-    timerID = setTimeout(gameLibrary.timeUp, 1000 * 4);
+    timerID = setTimeout(gameLibrary.timeUp, 1000 * 30);
     //display the question and options for this question
     displayQSet(gameLibrary.questionSet[gameLibrary.qTracker]);
   });
@@ -190,7 +193,7 @@ $(document).ready(function() {
       gameLibrary.startTimer();
       gameLibrary.counting = true;
       console.log(gameLibrary.counting);
-      timerID = setTimeout(gameLibrary.timeUp, 1000 * 4);
+      timerID = setTimeout(gameLibrary.timeUp, 1000 * 30);
     }
     //else
     else {
