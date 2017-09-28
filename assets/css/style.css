@@ -22,8 +22,16 @@
 #titleBox > h1 {
   color: #4baf3f;
   font-family: 'Anton', sans-serif; 
-  font-size: 80px; 
+  font-size: 59px; 
   font-weight: bold;
+  width: 59%;
+  margin: 1.5% auto;
+
+  -webkit-transform:scale(1.75, 1.0);
+  -moz-transform:scale(1.75, 1.0);
+  -ms-transform:scale(1.75, 1.0);
+  -o-transform:scale(1.75, 1.0);
+  transform:scale(1.75,1.0);
 }
 
 #titleBox > h1 > small {
@@ -31,7 +39,7 @@
   color: #4baf3f;
   position: relative;
   bottom: 29px;
-  margin: 0 -14px;
+  margin: 0 -12px;
 }
 
 #welcomeImage {
