@@ -9,8 +9,9 @@ $(document).ready(function() {
     questionSet: [],
     qTracker: 0,
     qLocked: false,
-    goodGif: [],
-    badGif: [],
+    goodGif: ["assets/images/andy-surprise.gif", "assets/images/ben-wink.gif", "assets/images/ralphio-rain.gif", "assets/images/ron-dance.gif", "assets/images/ron-proud.gif", "assets/images/ron-tiger.gif", "assets/images/tom-shoulder-brush.gif", "assets/images/treat-yoself-2.gif"],
+
+    badGif: ["assets/images/andy-five-second.gif", "assets/images/april-scream.gif", "assets/images/ben-party-over.gif", "assets/images/chris-options.gif", "assets/images/hi-five-fail.gif", "assets/images/hurts-dying.gif", "assets/images/jammed.gif", "assets/images/leslie-no.gif", "assets/images/ron-no.gif", "assets/images/ron-whole-ass.gif", "assets/images/ron-wizard-fail.gif", "assets/images/ron-wrong-department.gif", "assets/images/tom-hit.gif",],
 
     countDown: function() {
       gameLibrary.timerCount--;
@@ -41,11 +42,14 @@ $(document).ready(function() {
       gameLibrary.counting = false;
       console.log(gameLibrary.counting);
       gameLibrary.stopTimer();
-      gameLibrary.resetTimer();
+      // gameLibrary.resetTimer();
       //display the time up msg and the correct answer
       $("#message").text("Time's Up!");
+      $("#gif-box").append('<img class="img-responsive" src="assets/images/chris-options.gif">');
       //make the next button visible
-      $("#next").removeClass("hidden");
+      setTimeout( function() {
+        $("#next").removeClass("hidden");
+      }, 3000);
     },
 
     correctMessage: function() {
@@ -54,6 +58,26 @@ $(document).ready(function() {
 
     incorrectMesssage: function() {
       $("#message").text("Incorrect!");
+    },
+
+    randomGoodGif: function() {
+      // choose one gif at random from the good gifs array;
+      console.log(gameLibrary.goodGif.length);
+      var ranIndex = Math.floor(Math.random() * gameLibrary.goodGif.length)
+      console.log(ranIndex);
+      var gifToLoad = gameLibrary.goodGif[ranIndex];
+      var gifTag = $('<img class="img-responsive" src="' + gifToLoad + '">');
+      $("#gif-box").append(gifTag);   
+    },
+
+    randomBadGif: function() {
+    //  choose one gif at random from the bad gifs array;
+      console.log(gameLibrary.badGif.length);
+      var ranIndex = Math.floor(Math.random() * gameLibrary.badGif.length)
+      console.log(ranIndex);
+      var gifToLoad = gameLibrary.badGif[ranIndex];
+      var gifTag = $('<img class="img-responsive" src="' + gifToLoad + '">');
+      $("#gif-box").append(gifTag);    
     }
   }
 
@@ -71,6 +95,7 @@ $(document).ready(function() {
   //for each new question, erases the content previously on the page and repopulate with the new question-answer set in formatted HTML 
   function displayQSet(index) {
     $("#content").html("");
+    $("#content").append('<div class="text-center" id="gif-box"></div>');
     $("#content").append('<div><h4>Time Left: <span id="timeLeft"></span> Seconds</h4></div>');
     $("#content").append('<div class="prompt"><h2>Question: <span id="question">' + index.question + '</span></h2></div>');
     index.options.forEach(populateOptions);
@@ -83,7 +108,7 @@ $(document).ready(function() {
   // test scripting starts here;
   var q1 = new QSet("What is the name of the town the characters in Parks & Rec live in?", "Raleigh", "Pawnee", "Eagleton", "Pyrmont", "option2");
   gameLibrary.questionSet.push(q1);
-  var q2 = new QSet("What is the name of Pawnee's rival town?", "Eagleton", "Beaverton", "Beagleton", "Indinanapolis", "option1");
+  var q2 = new QSet("What is the name of Pawnee's rival town?", "Eagleton", "Beaverton", "Beagleton", "Indianapolis", "option1");
   gameLibrary.questionSet.push(q2);
   var q3 = new QSet("What does Ben 'Treat Yoself' to?", "A Lightsaber", "A model of the starship Galactaca", "A new car", "A Batsuit", "option4");
   gameLibrary.questionSet.push(q3);
@@ -117,6 +142,10 @@ $(document).ready(function() {
     $("#start").addClass("hidden");
     //change the html from the start page to the question set format
     $("#welcome").addClass("hidden");
+    //set a 3 second timeout on everything below this point and display the leslie-ready gif in welcome image;
+
+    // $("#welcomeImage").html('<img class="img-responsive" src=' + leslie-ready + '>');
+
     $("#welcomeImage").addClass("hidden");
     $("#content").removeClass("hidden");
     $("#message").removeClass("hidden");
@@ -149,7 +178,7 @@ $(document).ready(function() {
       gameLibrary.counting = false;
       console.log(gameLibrary.counting);
       gameLibrary.stopTimer();
-      gameLibrary.resetTimer();
+      // gameLibrary.resetTimer();
       clearTimeout(timerID);
       //evaluate
       //if correct, 
@@ -162,6 +191,7 @@ $(document).ready(function() {
         picked.addClass("correct");
         //display the "correct" message;
         gameLibrary.correctMessage();
+        gameLibrary.randomGoodGif();
       }
       //if incorrect,
       else {
@@ -173,9 +203,12 @@ $(document).ready(function() {
         $("#" + gameLibrary.questionSet[gameLibrary.qTracker].correct).addClass("correct");
         //display the "incorrect" message;
         gameLibrary.incorrectMesssage();
+        gameLibrary.randomBadGif();
       }
       //make the "next" button visible;
-      $("#next").removeClass("hidden");
+      setTimeout( function() {
+        $("#next").removeClass("hidden");
+      }, 3000);
 
     }
   });
@@ -184,6 +217,7 @@ $(document).ready(function() {
   $("#next").on("click", function() {
     //hide the "next" button
     $(this).addClass("hidden");
+    $("#message").empty();
     //if there are more questions left
     if((gameLibrary.qTracker + 1) < gameLibrary.questionSet.length) {
       //reset the css formatting on the answers html
@@ -193,6 +227,7 @@ $(document).ready(function() {
       //call displayQset on the new qTracker
       displayQSet(gameLibrary.questionSet[gameLibrary.qTracker]);
       //start the counter
+      gameLibrary.resetTimer();
       gameLibrary.startTimer();
       gameLibrary.counting = true;
       console.log(gameLibrary.counting);

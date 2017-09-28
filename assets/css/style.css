@@ -45,3 +45,7 @@
 #welcomeImage {
   max-width: 100%;
 }
+
+#gif-box > img {
+  margin: 2px auto;
+}
