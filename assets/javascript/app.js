@@ -79,13 +79,14 @@ $(document).ready(function() {
   }
 
   // test scripting starts here;
-  var q1 = new QSet("What is my name?", "Justin", "Yoli", "Sahil", "Amber", "option1");
+  var q1 = new QSet("What is the name of the town the characters in Parks & Rec live in?", "Raleigh", "Pawnee", "Eagleton", "Pyrmont", "option2");
   gameLibrary.questionSet.push(q1);
-  var q2 = new QSet("What is my name?", "Sahil", "Yoli", "Justin", "Amber", "option3");
+  var q2 = new QSet("What is the name of Pawnee's rival town?", "Eagleton", "Beaverton", "Beagleton", "Indinanapolis", "option1");
   gameLibrary.questionSet.push(q2);
-  var q3 = new QSet("What is my name?", "Justin", "Mike", "James", "Alex", "option3");
+  var q3 = new QSet("What does Ben 'Treat Yoself' to?", "A Lightsaber", "A model of the starship Galactaca", "A new car", "A Batsuit", "option4");
   gameLibrary.questionSet.push(q3);
-  gameLibrary.questionSet.push(new QSet("What is my name?", "Justin", "Mike", "James", "Alex", "option3"));
+  gameLibrary.questionSet.push(new QSet("What is the name of the game that Ben creates?", "Settlers of Catan", "Dominion", "The Cones of Dunshire", "The Mines of Moria", "option3"));
+  gameLibrary.questionSet.push(new QSet("Who is Pawnee's biggest celebrity?", "Li'l Sebastian", ))
 
   console.log(gameLibrary.questionSet);
 
@@ -112,6 +113,7 @@ $(document).ready(function() {
     $("#welcome").addClass("hidden");
     $("#welcomeImage").addClass("hidden");
     $("#content").removeClass("hidden");
+    $("#message").removeClass("hidden");
       //attempted refactor of the above lines here
     // $("#content").html("");
     // $("#content").append('<div><h4>Time Left: <span id="timeLeft"></span> Seconds</h4></div>');
@@ -124,7 +126,7 @@ $(document).ready(function() {
     gameLibrary.startTimer();
     gameLibrary.counting = true;
     console.log(gameLibrary.counting);
-    timerID = setTimeout(gameLibrary.timeUp, 1000 * 30);
+    timerID = setTimeout(gameLibrary.timeUp, 1000 * 4);
     //display the question and options for this question
     displayQSet(gameLibrary.questionSet[gameLibrary.qTracker]);
   });
@@ -188,7 +190,7 @@ $(document).ready(function() {
       gameLibrary.startTimer();
       gameLibrary.counting = true;
       console.log(gameLibrary.counting);
-      timerID = setTimeout(gameLibrary.timeUp, 1000 * 30);
+      timerID = setTimeout(gameLibrary.timeUp, 1000 * 4);
     }
     //else
     else {
