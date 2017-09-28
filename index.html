@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <title>Trivia!</title>
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Anton|Roboto:900|Work+Sans:700" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
@@ -11,32 +12,35 @@
   <div class="container-fluid" id="pageContainer">
     <div class="row">
       <div class="col-xs-12 text-center" id="titleBox">
-        <h1>Parks & Rec Trivia!</h1>
+        <h1>Parks <small>and</small> Recreation Trivia!</h1>
       </div>
     </div> <!-- End of Title Box Row -->
     <div class="row">
       <div class="col-xs-12 text-center">
-        <h2><div id="message"></div></h2>
+        <div id="welcomeImage">
+          <img src="https://typeset-beta.imgix.net/rehost%2F2016%2F9%2F13%2F6544486c-537d-4c52-97b6-1d2180a26662.jpg" class="img-responsive">
+        </div>
+        <div id="welcome">
+          <!-- <h1>Welcome to Parks & Rec Trivia!</h1> -->
+          <h2>Press Start to begin the quiz!</h2>
+        </div>
+        <h2><div id="message" class="hidden">
+          
+
+        </div></h2>
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-12 text-center" id="content">
-        <!-- this is a refactor attempt
-          <h1>Welcome to Parks and Rec Trivia!</h1>
-          <h2>Press Start to begin the quiz!</h2> -->
-        <div id="welcome">
-          <h1>Welcome to Parks and Rec Trivia!</h1>
-          <h2>Press Start to begin the quiz!</h2>
-        </div>
-        <div id="onStart" class="hidden">
-          <!-- All of this gets added in when the start button is clicked. -->
+      <div class="col-xs-12 text-center hidden" id="content">
+        <!-- <div id="onStart" class="hidden">
+          All of this gets added in when the start button is clicked.
           <div><h4>Time Left: <span id="timeLeft"></span> Seconds</h4></div>
           <div class="prompt"><h2>Question: <span id="question">Question</span></h2></div>
           <div class="answer-line"><h3><span class="answer" id="option1">option 1</span></h3></div>
           <div class="answer-line"><h3><span class="answer" id="option2">option 2</span></h3></div>
           <div class="answer-line"><h3><span class="answer" id="option3">option 3</span></h3></div>
           <div class="answer-line"><h3><span class="answer" id="option4">option 4</span></h3></div>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="row">
@@ -50,4 +54,4 @@
   </div>
   <script type="text/javascript" src="assets/javascript/app.js"></script>
 </body>
-</html>s
+</html>

@@ -58,28 +58,34 @@ $(document).ready(function() {
   var countdownID;
   var timerID;
 
+  //question-answer object template
   function QSet(question, option1, option2, option3, option4, correct) {
     var that = this;
     this.question = question;
-    this.option1 = option1;
-    this.option2 = option2;
-    this.option3 = option3;
-    this.option4 = option4;
+    this.options = [option1, option2, option3, option4];
     this.correct = correct;
   }
 
+  //for each new question, erases the content previously on the page and repopulate with the new question-answer set in formatted HTML 
   function displayQSet(index) {
-    $("#question").text(index.question);
-    $("#option1").text(index.option1);
-    $("#option2").text(index.option2);
-    $("#option3").text(index.option3);
-    $("#option4").text(index.option4);
+    $("#content").html("");
+    $("#content").append('<div><h4>Time Left: <span id="timeLeft"></span> Seconds</h4></div>');
+    $("#content").append('<div class="prompt"><h2>Question: <span id="question">' + index.question + '</span></h2></div>');
+    index.options.forEach(populateOptions);
+
+      function populateOptions(option,index) {
+        $("#content").append('<div class="answer-line"><h3><span class="answer" id="option'+ (index+1) +'">'+ option +'</span></h3></div>');
+      }
   }
+
   // test scripting starts here;
   var q1 = new QSet("What is my name?", "Justin", "Yoli", "Sahil", "Amber", "option1");
   gameLibrary.questionSet.push(q1);
   var q2 = new QSet("What is my name?", "Sahil", "Yoli", "Justin", "Amber", "option3");
   gameLibrary.questionSet.push(q2);
+  var q3 = new QSet("What is my name?", "Justin", "Mike", "James", "Alex", "option3");
+  gameLibrary.questionSet.push(q3);
+  gameLibrary.questionSet.push(new QSet("What is my name?", "Justin", "Mike", "James", "Alex", "option3"));
 
   console.log(gameLibrary.questionSet);
 
@@ -104,7 +110,8 @@ $(document).ready(function() {
     $("#start").addClass("hidden");
     //change the html from the start page to the question set format
     $("#welcome").addClass("hidden");
-    $("#onStart").removeClass("hidden");
+    $("#welcomeImage").addClass("hidden");
+    $("#content").removeClass("hidden");
       //attempted refactor of the above lines here
     // $("#content").html("");
     // $("#content").append('<div><h4>Time Left: <span id="timeLeft"></span> Seconds</h4></div>');
