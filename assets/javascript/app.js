@@ -61,23 +61,41 @@ $(document).ready(function() {
     },
 
     randomGoodGif: function() {
-      // choose one gif at random from the good gifs array;
-      console.log(gameLibrary.goodGif.length);
-      var ranIndex = Math.floor(Math.random() * gameLibrary.goodGif.length)
-      console.log(ranIndex);
-      var gifToLoad = gameLibrary.goodGif[ranIndex];
-      var gifTag = $('<img class="img-responsive" src="' + gifToLoad + '">');
-      $("#gif-box").append(gifTag);   
+      //if the current qset has a good gif assigned
+      if(gameLibrary.questionSet[gameLibrary.qTracker].correctGif) {
+        //display that good gif;
+        console.log("CorrectGif exists");
+        var gifTag = $('<img class="img-responsive" src="' + gameLibrary.questionSet[gameLibrary.qTracker].correctGif + '">');
+        $("#gif-box").append(gifTag);
+      }
+      // otherwise, choose one gif at random from the good gifs array;
+      else {
+        console.log(gameLibrary.goodGif.length);
+        var ranIndex = Math.floor(Math.random() * gameLibrary.goodGif.length)
+        console.log(ranIndex);
+        var gifToLoad = gameLibrary.goodGif[ranIndex];
+        var gifTag = $('<img class="img-responsive" src="' + gifToLoad + '">');
+        $("#gif-box").append(gifTag);
+      }  
     },
 
     randomBadGif: function() {
-    //  choose one gif at random from the bad gifs array;
-      console.log(gameLibrary.badGif.length);
-      var ranIndex = Math.floor(Math.random() * gameLibrary.badGif.length)
-      console.log(ranIndex);
-      var gifToLoad = gameLibrary.badGif[ranIndex];
-      var gifTag = $('<img class="img-responsive" src="' + gifToLoad + '">');
-      $("#gif-box").append(gifTag);    
+      //if the current qset has a bad gif assigned
+      if(gameLibrary.questionSet[gameLibrary.qTracker].incorrectGif) {
+        //display that bad gif;
+        console.log("IncorrectGif exists");
+        var gifTag = $('<img class="img-responsive" src="' + gameLibrary.questionSet[gameLibrary.qTracker].incorrectGif + '">');
+        $("#gif-box").append(gifTag);
+      }
+      //  otherwise, choose one gif at random from the bad gifs array;
+      else {
+        console.log(gameLibrary.badGif.length);
+        var ranIndex = Math.floor(Math.random() * gameLibrary.badGif.length)
+        console.log(ranIndex);
+        var gifToLoad = gameLibrary.badGif[ranIndex];
+        var gifTag = $('<img class="img-responsive" src="' + gifToLoad + '">');
+        $("#gif-box").append(gifTag);    
+      }
     }
   }
 
@@ -85,11 +103,13 @@ $(document).ready(function() {
   var timerID;
 
   //question-answer object template
-  function QSet(question, option1, option2, option3, option4, correct) {
+  function QSet(question, option1, option2, option3, option4, correct, correctGif, incorrectGif) {
     var that = this;
     this.question = question;
     this.options = [option1, option2, option3, option4];
     this.correct = correct;
+    this.correctGif = correctGif;
+    this.incorrectGif = incorrectGif;
   }
 
   //for each new question, erases the content previously on the page and repopulate with the new question-answer set in formatted HTML 
@@ -112,8 +132,8 @@ $(document).ready(function() {
   gameLibrary.questionSet.push(q2);
   var q3 = new QSet("What does Ben 'Treat Yoself' to?", "A Lightsaber", "A model of the starship Galactaca", "A new car", "A Batsuit", "option4");
   gameLibrary.questionSet.push(q3);
-  gameLibrary.questionSet.push(new QSet("What is the name of the game that Ben creates?", "Settlers of Catan", "Dominion", "The Cones of Dunshire", "The Mines of Moria", "option3"));
-  gameLibrary.questionSet.push(new QSet("Who is Pawnee's biggest celebrity?", "Li'l Sebastian", "Ginuwine", "Pete Disellio", "Perd Hapley", "option1"));
+  gameLibrary.questionSet.push(new QSet("What is the name of the game that Ben creates?", "Settlers of Catan", "Dominion", "The Cones of Dunshire", "The Mines of Moria", "option3", "assets/images/ben-cones.gif"));
+  gameLibrary.questionSet.push(new QSet("Who is Pawnee's biggest celebrity?", "Li'l Sebastian", "Ginuwine", "Pete Disellio", "Perd Hapley", "option1", "assets/images/ben-sebastian.gif", "assets/images/tom-ginuwine.gif"));
   gameLibrary.questionSet.push(new QSet("What is the name of Pawnee's most raunchy morning talk show?", "Eric Cartman and the Coon", "Howard Stern", "Batty Bob and the Tweaky Trio", "Crazy Ira and the Douche", "option4"));
   gameLibrary.questionSet.push(new QSet("What is the name of Joan Calamezzo's television talk show?", "Pawnee Now", "Pawnee Today", "Pawnee in the Morning", "Good Morning Pawnee", "option2"));
   gameLibrary.questionSet.push(new QSet("Who is Andy's crime-fighting alter ego, and who does he work for?", "Kurt Smacklin, CIA", "Ethan Hunt, Secret Service", "Burt Macklin, FBI", "John Sheppard, US Air Force", "option3"));
@@ -144,26 +164,21 @@ $(document).ready(function() {
     $("#welcome").addClass("hidden");
     //set a 3 second timeout on everything below this point and display the leslie-ready gif in welcome image;
 
-    // $("#welcomeImage").html('<img class="img-responsive" src=' + leslie-ready + '>');
+    $("#welcomeImage").html('<img class="img-responsive" src="assets/images/leslie-ready.gif">');
 
-    $("#welcomeImage").addClass("hidden");
-    $("#content").removeClass("hidden");
-    $("#message").removeClass("hidden");
-      //attempted refactor of the above lines here
-    // $("#content").html("");
-    // $("#content").append('<div><h4>Time Left: <span id="timeLeft"></span> Seconds</h4></div>');
-    // $("#content").append(' <div class="prompt"><h2>Question: <span id="question">Question</span></h2></div>');
-    // $("#content").append('<div class="answer-line"><h3><span class="answer" id="option1">option 1</span></h3></div>');
-    // $("#content").append('<div class="answer-line"><h3><span class="answer" id="option2">option 2</span></h3></div>');
-    // $("#content").append('<div class="answer-line"><h3><span class="answer" id="option3">option 3</span></h3></div>');
-    // $("#content").append('<div class="answer-line"><h3><span class="answer" id="option4">option 4</span></h3></div>');
-    //start the timer & countdown for this question, change counting to true;
-    gameLibrary.startTimer();
-    gameLibrary.counting = true;
-    console.log(gameLibrary.counting);
-    timerID = setTimeout(gameLibrary.timeUp, 1000 * 30);
-    //display the question and options for this question
-    displayQSet(gameLibrary.questionSet[gameLibrary.qTracker]);
+    setTimeout( function() {
+      $("#welcomeImage").addClass("hidden");
+      $("#content").removeClass("hidden");
+      $("#message").removeClass("hidden");
+        
+      gameLibrary.startTimer();
+      gameLibrary.counting = true;
+      console.log(gameLibrary.counting);
+      timerID = setTimeout(gameLibrary.timeUp, 1000 * 30);
+      //display the question and options for this question
+      displayQSet(gameLibrary.questionSet[gameLibrary.qTracker]);
+    }, 1750);
+
   });
 
 
