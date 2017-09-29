@@ -9,9 +9,9 @@ $(document).ready(function() {
     questionSet: [],
     qTracker: 0,
     qLocked: false,
-    goodGif: ["assets/images/andy-surprise.gif", "assets/images/ben-wink.gif", "assets/images/ralphio-rain.gif", "assets/images/ron-dance.gif", "assets/images/ron-proud.gif", "assets/images/ron-tiger.gif", "assets/images/tom-shoulder-brush.gif", "assets/images/treat-yoself-2.gif"],
+    goodGif: ["andy-surprise.gif", "ralphio-rain.gif", "ron-dance.gif", "ron-proud.gif", "ron-tiger.gif", "tom-shoulder-brush.gif", "treat-yoself-2.gif"],
 
-    badGif: ["assets/images/andy-five-second.gif", "assets/images/april-scream.gif", "assets/images/ben-party-over.gif", "assets/images/hi-five-fail.gif", "assets/images/hurts-dying.gif", "assets/images/jammed.gif", "assets/images/leslie-no.gif", "assets/images/ron-no.gif", "assets/images/ron-whole-ass.gif", "assets/images/ron-wizard-fail.gif", "assets/images/ron-wrong-department.gif", "assets/images/tom-hit.gif",],
+    badGif: ["andy-five-second.gif", "ben-party-over.gif", "hi-five-fail.gif", "hurts-dying.gif", "jammed.gif", "leslie-no.gif", "ron-no.gif", "ron-whole-ass.gif", "tom-hit.gif",],
 
     countDown: function() {
       gameLibrary.timerCount--;
@@ -48,7 +48,7 @@ $(document).ready(function() {
       $("#gif-box").append('<img class="img-responsive" src="assets/images/chris-options.gif">');
       //make the next button visible
       setTimeout( function() {
-        $("#next").removeClass("hidden");
+        $("#next").removeClass("invisible");
       }, 3000);
     },
 
@@ -65,7 +65,7 @@ $(document).ready(function() {
       if(gameLibrary.questionSet[gameLibrary.qTracker].correctGif) {
         //display that good gif;
         console.log("CorrectGif exists");
-        var gifTag = $('<img class="img-responsive" src="' + gameLibrary.questionSet[gameLibrary.qTracker].correctGif + '">');
+        var gifTag = $('<img class="img-responsive" src="assets/images/' + gameLibrary.questionSet[gameLibrary.qTracker].correctGif + '">');
         $("#gif-box").append(gifTag);
       }
       // otherwise, choose one gif at random from the good gifs array;
@@ -74,7 +74,7 @@ $(document).ready(function() {
         var ranIndex = Math.floor(Math.random() * gameLibrary.goodGif.length)
         console.log(ranIndex);
         var gifToLoad = gameLibrary.goodGif[ranIndex];
-        var gifTag = $('<img class="img-responsive" src="' + gifToLoad + '">');
+        var gifTag = $('<img class="img-responsive" src="assets/images/' + gifToLoad + '">');
         $("#gif-box").append(gifTag);
       }  
     },
@@ -84,7 +84,7 @@ $(document).ready(function() {
       if(gameLibrary.questionSet[gameLibrary.qTracker].incorrectGif) {
         //display that bad gif;
         console.log("IncorrectGif exists");
-        var gifTag = $('<img class="img-responsive" src="' + gameLibrary.questionSet[gameLibrary.qTracker].incorrectGif + '">');
+        var gifTag = $('<img class="img-responsive" src="assets/images/' + gameLibrary.questionSet[gameLibrary.qTracker].incorrectGif + '">');
         $("#gif-box").append(gifTag);
       }
       //  otherwise, choose one gif at random from the bad gifs array;
@@ -93,7 +93,7 @@ $(document).ready(function() {
         var ranIndex = Math.floor(Math.random() * gameLibrary.badGif.length)
         console.log(ranIndex);
         var gifToLoad = gameLibrary.badGif[ranIndex];
-        var gifTag = $('<img class="img-responsive" src="' + gifToLoad + '">');
+        var gifTag = $('<img class="img-responsive" src="assets/images/' + gifToLoad + '">');
         $("#gif-box").append(gifTag);    
       }
     }
@@ -126,17 +126,22 @@ $(document).ready(function() {
   }
 
   // test scripting starts here;
-  var q1 = new QSet("What is the name of the town the characters in Parks & Rec live in?", "Raleigh", "Pawnee", "Eagleton", "Pyrmont", "option2");
+  var q1 = new QSet("What is the name of the town the characters in Parks & Rec live in?", "Raleigh", "Pawnee", "Eagleton", "Pyrmont", "option2", "", "leslie-no.gif");
   gameLibrary.questionSet.push(q1);
-  var q2 = new QSet("What is the name of Pawnee's rival town?", "Eagleton", "Beaverton", "Beagleton", "Indianapolis", "option1");
+  var q2 = new QSet("What is the name of Pawnee's rival town?", "Eagleton", "Beaverton", "Beagleton", "Indianapolis", "option1", "eagleton-sucks.gif");
   gameLibrary.questionSet.push(q2);
-  var q3 = new QSet("What does Ben 'Treat Yoself' to?", "A Lightsaber", "A model of the starship Galactaca", "A new car", "A Batsuit", "option4");
+  var q3 = new QSet("What does Ben 'Treat Yoself' to?", "A Lightsaber", "A model of the starship Enterprise", "A new car", "A Batsuit", "option4", "ben-wink.gif", "ron-wizard-fail.gif");
   gameLibrary.questionSet.push(q3);
-  gameLibrary.questionSet.push(new QSet("What is the name of the game that Ben creates?", "Settlers of Catan", "Dominion", "The Cones of Dunshire", "The Mines of Moria", "option3", "assets/images/ben-cones.gif"));
-  gameLibrary.questionSet.push(new QSet("Who is Pawnee's biggest celebrity?", "Li'l Sebastian", "Ginuwine", "Pete Disellio", "Perd Hapley", "option1", "assets/images/ben-sebastian.gif", "assets/images/tom-ginuwine.gif"));
-  gameLibrary.questionSet.push(new QSet("What is the name of Pawnee's most raunchy morning talk show?", "Eric Cartman and the Coon", "Howard Stern", "Batty Bob and the Tweaky Trio", "Crazy Ira and the Douche", "option4"));
+  gameLibrary.questionSet.push(new QSet("What is the name of the game that Ben creates?", "Settlers of Catan", "Dominion", "The Cones of Dunshire", "The Mines of Moria", "option3", "ben-cones.gif"));
+  gameLibrary.questionSet.push(new QSet("Who is Pawnee's biggest celebrity?", "Li'l Sebastian", "Ginuwine", "Pete Disellio", "Perd Hapley", "option1", "ben-sebastian.gif", "tom-ginuwine.gif"));
+  gameLibrary.questionSet.push(new QSet("What is the name of Pawnee's most raunchy morning talk show?", "Eric Cartman and the Coon", "Howard Stern", "Batty Bob and the Tweaky Trio", "Crazy Ira and the Douche", "option4", "douche.gif", "douche.gif"));
   gameLibrary.questionSet.push(new QSet("What is the name of Joan Calamezzo's television talk show?", "Pawnee Now", "Pawnee Today", "Pawnee in the Morning", "Good Morning Pawnee", "option2"));
-  gameLibrary.questionSet.push(new QSet("Who is Andy's crime-fighting alter ego, and who does he work for?", "Kurt Smacklin, CIA", "Ethan Hunt, Secret Service", "Burt Macklin, FBI", "John Sheppard, US Air Force", "option3"));
+  gameLibrary.questionSet.push(new QSet("Who is Andy's crime-fighting alter ego, and who does he work for?", "Kurt Smacklin, CIA", "Ethan Hunt, Secret Service", "Burt Macklin, FBI", "John Sheppard, US Air Force", "option3", "macklin-spy.gif", "macklin-surprise.gif"));
+  gameLibrary.questionSet.push(new QSet("In what town was Leslie Knope born?", "Pawnee", "Indianapolis", "Eagleton", "Wamapoke", "option3", "eagleton-vold.gif"));
+  gameLibrary.questionSet.push(new QSet("What is the name of Jean-Ralphio's sister?", "Marie Antoinette", "Amelia Earhart", "Mona-Lisa", "Cleopatra", "option3", "mona-lisa.gif", "mona-lisa-no.gif"));
+  gameLibrary.questionSet.push(new QSet("What is Jerry Gergich's real name?", "Garry Gergich", "Larry Gergich", "Terry Gergich", "Jerry Gergich", "option1", "garry-right.gif", "garry-wrong.gif"));
+  gameLibrary.questionSet.push(new QSet("By the end of the show, Andy has a job as a...?", "Police Officer", "Grocery Store Bagger", "The lead singer in a rock band called Bad Apples", "Kids' TV show host named Johnny Karate", "option4", "ninjas.gif", "ninjas.gif"));
+  gameLibrary.questionSet.push(new QSet("For which day does April mistakenly schedule all of Ron's Meetings?", "February 29th", "March 29th", "April 1st", "February 2nd", "option2", "ron-wrong-department.gif", "april-scream.gif"));
 
 
   console.log(gameLibrary.questionSet);
@@ -159,7 +164,7 @@ $(document).ready(function() {
   //wait for player to click start
   $("#start").on("click", function() {
     //hide the start button
-    $("#start").addClass("hidden");
+    $("#start").addClass("invisible");
     //change the html from the start page to the question set format
     $("#welcome").addClass("hidden");
     //set a 3 second timeout on everything below this point and display the leslie-ready gif in welcome image;
@@ -222,7 +227,7 @@ $(document).ready(function() {
       }
       //make the "next" button visible;
       setTimeout( function() {
-        $("#next").removeClass("hidden");
+        $("#next").removeClass("invisible");
       }, 3000);
 
     }
@@ -231,7 +236,7 @@ $(document).ready(function() {
   //if the "next" button is clicked
   $("#next").on("click", function() {
     //hide the "next" button
-    $(this).addClass("hidden");
+    $(this).addClass("invisible");
     $("#message").empty();
     //if there are more questions left
     if((gameLibrary.qTracker + 1) < gameLibrary.questionSet.length) {
