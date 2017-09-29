@@ -11,7 +11,7 @@ $(document).ready(function() {
     qLocked: false,
     goodGif: ["assets/images/andy-surprise.gif", "assets/images/ben-wink.gif", "assets/images/ralphio-rain.gif", "assets/images/ron-dance.gif", "assets/images/ron-proud.gif", "assets/images/ron-tiger.gif", "assets/images/tom-shoulder-brush.gif", "assets/images/treat-yoself-2.gif"],
 
-    badGif: ["assets/images/andy-five-second.gif", "assets/images/april-scream.gif", "assets/images/ben-party-over.gif", "assets/images/chris-options.gif", "assets/images/hi-five-fail.gif", "assets/images/hurts-dying.gif", "assets/images/jammed.gif", "assets/images/leslie-no.gif", "assets/images/ron-no.gif", "assets/images/ron-whole-ass.gif", "assets/images/ron-wizard-fail.gif", "assets/images/ron-wrong-department.gif", "assets/images/tom-hit.gif",],
+    badGif: ["assets/images/andy-five-second.gif", "assets/images/april-scream.gif", "assets/images/ben-party-over.gif", "assets/images/hi-five-fail.gif", "assets/images/hurts-dying.gif", "assets/images/jammed.gif", "assets/images/leslie-no.gif", "assets/images/ron-no.gif", "assets/images/ron-whole-ass.gif", "assets/images/ron-wizard-fail.gif", "assets/images/ron-wrong-department.gif", "assets/images/tom-hit.gif",],
 
     countDown: function() {
       gameLibrary.timerCount--;

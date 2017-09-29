@@ -9,47 +9,52 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-  <div class="container-fluid" id="pageContainer">
+    <div class="container-fluid" id="pageContainer">
+    <img id="seal" src="assets/images/pawnee-seal.png">
     <div class="row">
       <div class="col-xs-12 text-center" id="titleBox">
         <h1>Parks <small>and</small> Recreation Trivia!</h1>
       </div>
     </div> <!-- End of Title Box Row -->
-    <div class="row">
-      <div class="col-xs-12 text-center">
-        <div id="welcomeImage">
-          <img src="assets/images/parksrec-crop.png" class="img-responsive">
+    <div class="row" id="main-window">
+      <div class="col-xs-12">
+        <div class="row">
+          <div class="col-xs-12 text-center">
+            <div id="welcomeImage">
+              <img src="assets/images/parksrec-crop.png" class="img-responsive">
+            </div>
+            <div id="welcome">
+              <!-- <h1>Welcome to Parks & Rec Trivia!</h1> -->
+              <h2>Press Start to begin the quiz!</h2>
+            </div>
+            <h2><div id="message" class="hidden">
+              
+            </div></h2>
+          </div>
         </div>
-        <div id="welcome">
-          <!-- <h1>Welcome to Parks & Rec Trivia!</h1> -->
-          <h2>Press Start to begin the quiz!</h2>
+        <div class="row">
+          <div class="col-xs-12 text-center hidden" id="content">
+            <!-- <div id="onStart" class="hidden">
+              All of this gets added in when the start button is clicked.
+              <div><h4>Time Left: <span id="timeLeft"></span> Seconds</h4></div>
+              <div class="prompt"><h2>Question: <span id="question">Question</span></h2></div>
+              <div class="answer-line"><h3><span class="answer" id="option1">option 1</span></h3></div>
+              <div class="answer-line"><h3><span class="answer" id="option2">option 2</span></h3></div>
+              <div class="answer-line"><h3><span class="answer" id="option3">option 3</span></h3></div>
+              <div class="answer-line"><h3><span class="answer" id="option4">option 4</span></h3></div>
+            </div> -->
+          </div>
         </div>
-        <h2><div id="message" class="hidden">
-          
-        </div></h2>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12 text-center hidden" id="content">
-        <!-- <div id="onStart" class="hidden">
-          All of this gets added in when the start button is clicked.
-          <div><h4>Time Left: <span id="timeLeft"></span> Seconds</h4></div>
-          <div class="prompt"><h2>Question: <span id="question">Question</span></h2></div>
-          <div class="answer-line"><h3><span class="answer" id="option1">option 1</span></h3></div>
-          <div class="answer-line"><h3><span class="answer" id="option2">option 2</span></h3></div>
-          <div class="answer-line"><h3><span class="answer" id="option3">option 3</span></h3></div>
-          <div class="answer-line"><h3><span class="answer" id="option4">option 4</span></h3></div>
-        </div> -->
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-6 col-xs-offset-3 text-center">
-        <div id="buttons">
-          <button type="button" class="btn btn-success btn-md" id="start">Start</button>
-          <button type="button" class="btn btn-success btn-md pull-right hidden" id="next">Next</button>
+        <div class="row last-row">
+          <div class="col-xs-6 col-xs-offset-3 text-center">
+            <div id="buttons">
+              <button type="button" class="btn btn-success btn-md" id="start">Start</button>
+              <button type="button" class="btn btn-success btn-md pull-right hidden" id="next">Next</button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </div> <!-- End of main-window -->
   </div>
   <script type="text/javascript" src="assets/javascript/app.js"></script>
 </body>
